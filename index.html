@@ -24,6 +24,12 @@
             height: 100%;
             overflow: hidden;
             z-index: -1;
+            transform: scale(1.1);
+            transition: transform 0.5s ease;
+        }
+
+        .video-container:hover {
+            transform: scale(1);
         }
 
         .video-container video {
@@ -121,6 +127,106 @@
             text-align: center;
             font-size: 14px;
         }
+
+        /* Button Hover Effect */
+        .button-hover {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .button-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Marquee Animation */
+        .marquee {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 0;
+            overflow: hidden;
+        }
+
+        .animate-marquee {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 10s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Glow Effect */
+        .glow {
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .glow:hover {
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.9);
+        }
+
+        /* Thumbnail Hover Effect */
+        .thumbnail-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .thumbnail-hover:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Fade In Animation */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Snowfall Effect */
+        #snowfall {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .snowflake {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            filter: blur(2px);
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Copy Confirmation */
+        #copy-confirm {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: green;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
@@ -147,35 +253,37 @@
     <!-- Konten -->
     <div class="container">
         <div class="glass">
-    <img src="https://i.supa.codes/7nBIU" class="w-full rounded-lg mb-4" alt="Thumbnail">
-    <h2 class="text-2xl font-bold text-blue-400 mb-2">Pembayaran</h2>
-    <p class="text-sm text-gray-300 mb-4">Silakan transfer ke nomor Dana di bawah ini</p>
+            <img src="https://i.supa.codes/7nBIU" class="w-full rounded-lg mb-4 thumbnail-hover" alt="Thumbnail">
+            <h2 class="text-2xl font-bold text-blue-400 mb-2">Pembayaran</h2>
+            <p class="text-sm text-gray-300 mb-4">Silakan transfer ke nomor Dana di bawah ini</p>
 
-    <div class="bg-white bg-opacity-20 p-3 rounded-lg mb-4">
-        <p class="text-lg font-semibold">Nomor Dana:</p>
-        <input type="text" value="08985397156" id="dana-number" readonly 
-               class="w-full bg-transparent text-center text-white text-lg font-bold cursor-pointer focus:outline-none"
-               onclick="copyDana()">
+            <div class="bg-white bg-opacity-20 p-3 rounded-lg mb-4">
+                <p class="text-lg font-semibold">Nomor Dana:</p>
+                <input type="text" value="08985397156" id="dana-number" readonly 
+                       class="w-full bg-transparent text-center text-white text-lg font-bold cursor-pointer focus:outline-none"
+                       onclick="copyDana()">
+            </div>
+
+            <!-- Tambahkan QRIS di sini -->
+            <div class="bg-white bg-opacity-20 p-3 rounded-lg mb-4">
+                <p class="text-lg font-semibold">Pembayaran QRIS:</p>
+                <img src="https://i.supa.codes/dCAIy" class="w-full rounded-lg mb-2 glow" alt="QRIS Code">
+                <p class="text-sm text-gray-300">Scan QRIS di atas untuk melakukan pembayaran</p>
+            </div>
+
+            <div class="space-y-3">
+                <a href="https://wa.me/6285194739970" target="_blank"
+                   class="block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded transition duration-300 button-hover">
+                   Chat Admin ⌬
+                </a>
+                <a href="https://whatsapp.com/channel/0029VaI5IB1IXnlwQTPv0b3h" target="_blank"
+                   class="block bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 rounded transition duration-300 button-hover">
+                   Join Channel ⌬
+                </a>
+            </div>
+        </div>
     </div>
 
-    <!-- Tambahkan QRIS di sini -->
-    <div class="bg-white bg-opacity-20 p-3 rounded-lg mb-4">
-        <p class="text-lg font-semibold">Pembayaran QRIS:</p>
-        <img src="https://i.supa.codes/dCAIy" class="w-full rounded-lg mb-2" alt="QRIS Code">
-        <p class="text-sm text-gray-300">Scan QRIS di atas untuk melakukan pembayaran</p>
-    </div>
-
-    <div class="space-y-3">
-        <a href="https://wa.me/6285194739970" target="_blank"
-           class="block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded transition duration-300">
-           Chat Admin ⌬
-        </a>
-        <a href="https://whatsapp.com/channel/0029VaI5IB1IXnlwQTPv0b3h" target="_blank"
-           class="block bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 rounded transition duration-300">
-           Join Channel ⌬
-        </a>
-    </div>
-</div>
     <!-- Footer -->
     <footer>© Eroze Store | Terimakasih sudah berbelanja di Eroze | Powered by Eroze UI</footer>
 
@@ -183,6 +291,9 @@
     <audio id="bg-music" loop autoplay>
         <source src="https://i.supa.codes/v2XyJ" type="audio/aac">
     </audio>
+
+    <!-- Snowfall Effect -->
+    <div id="snowfall"></div>
 
     <script>
         // Animasi Ketik & Hapus
@@ -215,14 +326,35 @@
             danaInput.select();
             danaInput.setSelectionRange(0, 99999);
             document.execCommand("copy");
-            alert("Nomor Dana disalin: " + danaInput.value);
+
+            // Tampilkan konfirmasi
+            let confirmElement = document.getElementById("copy-confirm");
+            confirmElement.style.display = "block";
+            setTimeout(() => {
+                confirmElement.style.display = "none";
+            }, 2000);
         }
 
         // Auto Play Musik
         window.addEventListener("click", () => {
             document.getElementById("bg-music").play();
         }, { once: true });
-    </script>
 
+        // Snowfall Effect
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            snowflake.style.opacity = Math.random();
+            snowflake.style.width = snowflake.style.height = Math.random() * 10 + 5 + 'px';
+            document.getElementById('snowfall').appendChild(snowflake);
+            setTimeout(() => {
+                snowflake.remove();
+            }, 5000);
+        }
+
+        setInterval(createSnowflake, 100);
+    </script>
 </body>
 </html>
